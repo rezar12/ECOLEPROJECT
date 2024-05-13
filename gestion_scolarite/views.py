@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Scolarite
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url="/admin")
 def voir_facture(request, scolarite_id):
     scolarite = Scolarite.objects.get(id=scolarite_id)
 

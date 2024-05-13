@@ -23,7 +23,7 @@
         margin: 0;
         padding: 0;
         height: fit-content;
-        background: silver;
+        background: rgb(51, 51, 51);
     }
 
     .A41 {
@@ -56,8 +56,8 @@
         margin: 0;
     }
 
-    .A41 .head-facture .left-head h1 {
-        font-size: 25px;
+    .A41 .head-facture .left-head h2 {
+        font-weight: 600;
     }
 
     .A41 .head-facture .right-head {
@@ -74,6 +74,10 @@
         gap: 1rem;
 
     }
+    .A41 .head-info div > h3{
+        font-size: 22px;
+        font-weight: 600;
+    }
 
     .A41 .head-info .info-ecole {
         width: 405px;
@@ -85,9 +89,9 @@
 
     .A41 .head-info .info-ecole span,
     .A41 .head-info .eleve-info span {
-        color: rgb(68, 68, 68);
-        font-style: oblique;
+        color: rgb(53, 53, 53);
         font-size: 16px;
+        font-weight: 300;
     }
 
     .A41 .inscription-info {
@@ -115,7 +119,7 @@
         border-bottom: 1px solid black;
     }
     .A41 .summary {
-        grid-column: span 5;
+        grid-column: 4 / span 2;
         grid-row-end: 13;
         text-align: right;
     }
@@ -123,6 +127,20 @@
     .A41 .footer {
         grid-column: span 5;
         grid-row-end: 14;
+        position: relative;
+        top: 25px;
+        line-height: 8px;
+        
+    }
+    .A41 .footer h4{
+        border-top: 2.5px solid rgb(31, 31, 31);
+        padding-top: 10px;
+        font-weight: 300;
+        font-size: 16px;
+        
+    }
+    .A41 .footer p{
+        font-size: 12px;
     }
 
     @page {
@@ -143,13 +161,13 @@
 </style>
 
 <body>
+    <div class="print" style="position: absolute;z-index: 2; transform: scale(0.5); cursor: pointer;" title="Imprimer" onclick="window.print()" ><svg version="1.1" id="Uploaded to svgrepo.com" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="64px" viewBox="0 0 32 32" xml:space="preserve" fill="white" stroke="white"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-width="0.064"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .blueprint_een{fill:white;} .st0{fill:white;} </style> <path class="blueprint_een" d="M31,10h-5V1c0-0.552-0.448-1-1-1H7C6.448,0,6,0.448,6,1v9H1c-0.552,0-1,0.448-1,1v12 c0,0.552,0.448,1,1,1h5v7c0,0.552,0.448,1,1,1h18c0.552,0,1-0.448,1-1v-7h5c0.552,0,1-0.448,1-1V11C32,10.448,31.552,10,31,10z M8,2 h16v9H8V2z M8,19h16v11H8V19z M30,22h-5v-3c0-0.552-0.448-1-1-1H8c-0.552,0-1,0.448-1,1v3H2V12h28V22z M4,14h1v1H4V14z M6,14h1v1H6 V14z M10,21h12v1H10V21z M10,24h12v1H10V24z M10,27h12v1H10V27z"></path> </g></svg></div>
     <div class="A41">
-
         <div class="head-facture">
             <div class="left-head">
-                <h1>REÇU DE VERSEMENT DE LA SCOLARITÉ</h1>
+                <h2>REÇU DE VERSEMENT DE LA SCOLARITÉ</h2>
                 <h4>date emission</h4>
-                <h2>{{ annee_scolaire }}</h2>
+                <h3>{{ annee_scolaire }}</h3>
             </div>
             <div class="right-head">
                 <div class="logo">
@@ -261,21 +279,21 @@
         </div>
         <div class="head-info">
             <div class="info-ecole">
-                <h2>École Tchanty</h2>
-                <h4> <span>Localisation :</span><br> Port-Bouet Air-France2,Terminus Tricycles</h4>
-                <h4><span>Télephone :</span> <br> 0102979704 / 0707665923</h4>
-                <h4><span>Email :</span> <br>écoletchanty23@gmail.com</h4>
+                <h3>École Tchanty</h3>
+                <h4> <span class="titre-span">Localisation :</span><br> Port-Bouet Air-France2</h4>
+                <h4><span class="titre-span">Télephone :</span> <br> 0102979704 / 0707665923</h4>
+                <h4><span class="titre-span">Email :</span> <br>écoletchanty23@gmail.com</h4>
             </div>
             <div class="eleve-info">
-                <h2>Élève</h2>
-                <h4><span>Nom & Prénom :</span> <br>{{ eleve.nom }} {{ eleve.prenom }}</h4>
-                <h4><span>Date de naissance :</span> <br>{{ eleve.date_naissance }}</h4>
-                <h4><span>Classe :</span> <br>{{ classe.nom }}</h4>
+                <h3>Élève</h3>
+                <h4><span class="titre-span">Nom & Prénom :</span> <br>{{ eleve.nom }} {{ eleve.prenom }}</h4>
+                <h4><span class="titre-span">Date de naissance :</span> <br>{{ eleve.date_naissance }}</h4>
+                <h4><span class="titre-span">Classe :</span> <br>{{ classe.nom }}</h4>
             </div>
         </div>
         <div class="inscription-info">
-            <h2>Date d'inscription : {{ date_inscription }}</h2>
-            <h2>Montant de la scolarité : {{ montant_scolarite }} Franc CFA </h2>
+            <h3>Date d'inscription : {{ date_inscription }}</h3>
+            <h3>Montant de la scolarité : {{ montant_scolarite }} Franc CFA </h3>
         </div>
         <div class="versement-info">
             <table>
@@ -297,11 +315,12 @@
         </div>
         <div class="summary">
             <h3>Montant versé: {{ montant_verse }} Fcfa</h3>
-            <h3>Reste à payer: {{ reste_a_payer }} Fcfa</h3>
+            <h3>Reste à payer: &nbsp;{{ reste_a_payer }} Fcfa</h3>
         </div>
         <div class="footer">
-            <hr>
-            <h4 style="text-align: center;"><i>Ecole Tchanty la mine d'or</i></h4>
+            <h4 style="text-align: center;">Ecole Tchanty la mine d'or</h4>
+            <p style="text-align: center;">0102979704 / 0707665923</p>
+            <p style="text-align: center;">écoletchanty23@gmail.com</p>
         </div>
     </div>
 
