@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import Scolarite, AnneeScolaire,Classe,Versement
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
-from django.db.models import Sum, F, ExpressionWrapper, DecimalField
+from django.db.models import Sum, F
 
 
 date_courante = now().date().year
