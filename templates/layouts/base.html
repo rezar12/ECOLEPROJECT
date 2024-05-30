@@ -1,0 +1,273 @@
+{% load i18n static admin_soft %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+{% get_direction as direction %}
+{% get_admin_setting as admin_setting %}
+{% load admin_soft %}
+
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"fr-fr" }}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+        Ecole Tchanty  {% block title %}{% endblock %}
+    </title>
+
+    <!-- Favicon -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+    <!-- Nucleo Icons -->
+    <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{% static 'css/soft-ui-dashboard.css' %}" rel="stylesheet" />
+    <link id="pagestyle_dark" href="{% static 'css/dark-theme-core.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/notyf.min.css' %}">
+    <style>
+      
+    @font-face {
+        font-family: 'Open Sans';
+        src: url("{% static 'fonts/OpenSans-Regular-webfont.eot' %}");
+        src: url("{% static 'fonts/OpenSans-Regular-webfont.eot?#iefix' %}") format('embedded-opentype'),
+            url("{% static 'fonts/OpenSans-Regular-webfont.woff' %}") format('woff'),
+            url("{% static 'fonts/OpenSans-Regular-webfont.ttf' %}") format('truetype');
+        font-weight: 400;
+        font-style: normal;
+
+    }
+    @font-face {
+        font-family: 'Open Sans';
+        src: url("{% static 'fonts/OpenSans-Regular-webfont.eot' %}");
+        src: url("{% static 'fonts/OpenSans-Regular-webfont.eot?#iefix' %}") format('embedded-opentype'),
+            url("{% static 'fonts/OpenSans-Regular-webfont.woff' %}") format('woff'),
+            url("{% static 'fonts/OpenSans-Regular-webfont.ttf' %}") format('truetype');
+        font-weight: 600;
+        font-style: normal;
+
+    }
+    
+    @font-face {
+        font-family: 'Open Sans';
+        src: url("{% static 'fonts/OpenSans-Light-webfont.eot' %}");
+        src: url("{% static 'fonts/OpenSans-Light-webfont.eot?#iefix' %}") format('embedded-opentype'),
+            url("{% static  'fonts/OpenSans-Light-webfont.woff' %}") format('woff'),
+            url("{% static  'fonts/OpenSans-Light-webfont.ttf' %}") format('truetype');
+        font-weight: 300;
+        font-style: normal;
+
+    }
+    /* @font-face {
+        font-family: 'Open Sans';
+        src: url("{% static 'fonts/OpenSans-ExtraBold-webfont.eot' %}");
+        src: url("{% static 'fonts/OpenSans-ExtraBold-webfont.eot?#iefix' %}") format('embedded-opentype'),
+            url("{% static  'fonts/OpenSans-ExtraBold-webfont.woff' %}") format('woff'),
+            url("{% static  'fonts/OpenSans-ExtraBold-webfont.ttf' %}") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+
+    } */
+    @font-face {
+        font-family: 'Open Sans';
+        src: url("{% static 'fonts/OpenSans-Bold-webfont.eot' %}");
+        src: url("{% static 'fonts/OpenSans-Bold-webfont.eot?#iefix' %}") format('embedded-opentype'),
+            url("{% static  'fonts/OpenSans-Bold-webfont.woff' %}") format('woff'),
+            url("{% static  'fonts/OpenSans-Bold-webfont.ttf' %}") format('truetype');
+        font-weight: 700;
+        font-style: normal;
+
+    }
+
+    </style>
+    {% block extrahead %}{% endblock extrahead %}
+    {% block extrastyle %}{% endblock extrastyle %}
+
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+
+    {% include "includes/sidebar.html" %}
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        {% include "includes/navigation.html" %} 
+        {% block content %}{% endblock content %}
+    </main>
+
+    <!-- APP Configurator -->
+
+<!--   Core JS Files   -->
+{% include 'includes/scripts.html' %}
+
+
+{% block scripts %}{% endblock scripts %}
+
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+
+<!-- Github buttons -->
+<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="{% static 'js/soft-ui-dashboard.min.js' %}"></script>
+<script src="{% static 'js/notyf.min.js' %}"></script>
+<script>
+notification = {
+    primary: function (message, from, align) {
+        const notyf = new Notyf({
+            position: {
+                x: align, // left or right
+                y: from, // bottom or top
+            },
+            types: [
+                {
+                    type: 'info',
+                    background: '#262B40',
+                    icon: {
+                        className: 'fas fa-comment-dots',
+                        tagName: 'span',
+                        color: '#fff'
+                    },
+                    dismissible: false,
+                    speed: 9000
+                }
+            ]
+        });
+        notyf.open({
+            type: 'info',
+            message: message
+        });
+    },
+    info: function (message, from, align) {
+        const notyf = new Notyf({
+            position: {
+                x: align, // left or right
+                y: from, // bottom or top
+            },
+            types: [
+                {
+                    type: 'info',
+                    background: '#0948B3',
+                    icon: {
+                        className: 'fas fa-comment-dots',
+                        tagName: 'span',
+                        color: '#fff'
+                    },
+                    dismissible: false
+                }
+            ]
+        });
+        notyf.open({
+            type: 'info',
+            message: message
+        });
+    },
+    success: function (message, from, align) {
+        const notyf = new Notyf({
+            position: {
+                x: align, // left or right
+                y: from, // bottom or top
+            },
+            types: [
+                {
+                    type: 'info',
+                    background: '#92f16d',
+                    icon: {
+                        className: 'fas fa-comment-dots',
+                        tagName: 'span',
+                        color: '#fff'
+                    },
+                    dismissible: false
+                }
+            ]
+        });
+        notyf.open({
+            type: 'info',
+            message: message
+        });
+    },
+    warning: function (message, from, align) {
+        const notyf = new Notyf({
+            position: {
+                x: align, // left or right
+                y: from, // bottom or top
+            },
+            types: [
+                {
+                    type: 'warning',
+                    background: '#F5B759',
+                    icon: {
+                        className: 'fas fa-comment-dots',
+                        tagName: 'span',
+                        color: '#fff'
+                    },
+                    dismissible: false
+                }
+            ],
+            delay: 9000
+        });
+        notyf.open({
+            type: 'warning',
+            message: message
+        });
+    },
+    danger: function (message, from, align) {
+        const notyf = new Notyf({
+            position: {
+                x: align, // left or right
+                y: from, // bottom or top
+            },
+            types: [
+                {
+                    type: 'error',
+                    background: '#FA5252',
+                    icon: {
+                        className: 'fas fa-comment-dots',
+                        tagName: 'span',
+                        color: '#fff'
+                    },
+                    dismissible: false
+                }
+            ]
+        });
+        notyf.open({
+            type: 'error',
+            message: message
+        });
+    }
+};
+
+const checkboxs = document.querySelectorAll('input[type=checkbox]');
+for (var i = 0; i < checkboxs.length; i++) {
+    checkboxs[i].classList.add('form-check-input');
+}
+
+const texts = document.querySelectorAll('select');
+for (var y = 0; y < texts.length; y++) {
+    texts[y].classList.add('form-select');
+}
+
+const r = document.querySelectorAll('input[type=text], input[type=email], input[type=password], input[type=number], textarea');
+for (var z = 0; z < r.length; z++) {
+    r[z].classList.add('form-control');
+}
+
+</script>
+<!-- <script src="{% static 'js/scripts.js' %}"></script> -->
+
+{% block extrascript %}{% endblock extrascript %}
+
+</body>
+</html>

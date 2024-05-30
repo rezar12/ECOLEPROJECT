@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # configurer de telsorte que le panel admin coincide avec l'url main
+    path('', RedirectView.as_view(url="/admin/", permanent=True)),
     path('gestion_scolarite/', include('gestion_scolarite.urls')),
 ]
