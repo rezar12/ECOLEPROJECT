@@ -224,6 +224,7 @@
       success: function (response) {  // Fonction à exécuter en cas de succès
         data_get = response; // Afficher la réponse dans la console
         // Utilisez les données de la réponse comme vous le souhaitez
+        console.log(data_get)
         var ctx = document.getElementById("chart-bars").getContext("2d");
         if (Object.keys(data_get.effectifs_classes).length != 0) {
           new Chart(ctx, {
@@ -298,8 +299,9 @@
           });
         }
         else {
-          ctx.font = "48px serif";
-          ctx.fillText("IL N'Y A AUCUNE CLASSE ENCORE ENREGISTRÉE", 10, 50);
+          ctx.font = "12px sans-serif";
+          ctx.fillStyle = "red";
+          ctx.fillText("AUCUNE CLASSE ENCORE ENREGISTRÉE", 0, 50);
         }
 
       },
