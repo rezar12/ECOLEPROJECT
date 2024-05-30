@@ -26,7 +26,7 @@ SETTINGS_PATH = os.path.realpath(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(str(os.getenv('DEBUG')))
+DEBUG = eval(os.getenv('DEBUG'))
 
 ALLOWED_HOSTS = []
 

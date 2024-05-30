@@ -32,7 +32,6 @@
                 <a href="{% add_preserved_filters delete_url %}" class="btn btn-sm btn-danger">{% trans "Delete" %}</a>
             {% endif %}
         {% endblock %}
-        <button type="button" class="btn btn-sm btn-secondary"><a href="{{ request.path|back_url }}" style="text-decoration: none;color: white;" >Retour</a></button>
-        <p></p>
+                <a href="{{ request.path|back_url }}"  class="btn btn-sm btn-secondary" style="text-decoration: none;color: white;" >Retour</a>
     </div>
 </div>
