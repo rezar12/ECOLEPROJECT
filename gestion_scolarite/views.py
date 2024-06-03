@@ -4,12 +4,14 @@ from .models import Scolarite, AnneeScolaire,Classe,Versement
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 from django.db.models import Sum, F
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 date_courante = now().date().year
 annee_scolaire_get = f'{date_courante}-{date_courante+1}'
 # lié a une action de consultation des factures
 @login_required(login_url="/admin")
+@staff_member_required
 def voir_facture(request, scolarite_id):
     scolarite = Scolarite.objects.get(id=scolarite_id)
 
@@ -39,6 +41,7 @@ def voir_facture(request, scolarite_id):
     return render(request, 'voir_facture.html', context)
 
 @login_required(login_url="/admin")
+@staff_member_required
 def effectifs_annee_scolaire_courante(request):
 
     try:
@@ -64,6 +67,7 @@ def effectifs_annee_scolaire_courante(request):
 
 
 @login_required(login_url="/admin")
+@staff_member_required
 def effectif_total(request):
 
     
@@ -80,6 +84,7 @@ def effectif_total(request):
     return JsonResponse(data)
 
 @login_required(login_url="/admin")
+@staff_member_required
 def solde_ok(request):
     # Annoter les instances de Scolarite avec le total des versements
     try: 
@@ -96,6 +101,7 @@ def solde_ok(request):
     return JsonResponse({'inscriptions_soldes': inscriptions_soldes})
 
 @login_required(login_url="/admin")
+@staff_member_required
 def montant_total(request):
     try: 
          annee_scolaire = AnneeScolaire.objects.get(annee_scolaire=annee_scolaire_get)
