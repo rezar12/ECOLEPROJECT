@@ -19202,7 +19202,7 @@ hr.horizontal.gray-light {
   top: 0;
   bottom: 0;
   width: 100%;
-  max-width: 15.625rem !important;
+  max-width: 22rem !important;
   overflow-y: auto;
   padding: 0;
   box-shadow: none;
@@ -19799,7 +19799,7 @@ hr.horizontal.gray-light {
     padding: 1.5rem;
   }
   .sidenav.fixed-start ~ .main-content {
-    margin-left: 17.125rem;
+    margin-left: 23.650rem;
   }
   .sidenav.fixed-end ~ .main-content {
     margin-right: 17.125rem;

@@ -53,13 +53,8 @@ def effectifs_annee_scolaire_courante(request):
     effectifs_classes = {
         classe.nom: classe.Effectif_classe for classe in Classe.objects.filter(annee_scolaire=annee_scolaire)
     }
-
-    # Préparer les données à retourner en JSON
+    
     data = {
-        # 'annee_scolaire': {
-        #     'debut': annee_scolaire.annee_debut.strftime('%Y-%m-%d'),
-        #     'fin': annee_scolaire.annee_fin.strftime('%Y-%m-%d'),
-        # },
         'effectifs_classes': effectifs_classes
     }
 

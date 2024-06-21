@@ -19,15 +19,20 @@
         position: relative;
     }
 
-    .print{
+    .print,.pdf{
         position: absolute;
+        cursor: pointer;
+    }
+    .print{
         inset: 0;
         width: 15px;
         height: 15px;
-        cursor: pointer;
     }
-    .print svg{
-        scale: 0.8;
+    .pdf{
+        left: 75px;
+    }
+    .print svg, .pdf svg{
+        scale: 0.65;
     }
     .A41 {
         width: 21cm;
@@ -37,8 +42,9 @@
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(12, 1fr);
         padding: 1.2rem;
-        border: 2px solid rgb(41, 41, 41);
         background: white;
+        overflow: hidden;
+        box-sizing: border-box;
     }
 
     /* body{
@@ -135,7 +141,7 @@
         grid-column: span 5;
         grid-row-end: 14;
         position: relative;
-        top: 25px;
+        top: 20px;
         line-height: 8px;
         
     }

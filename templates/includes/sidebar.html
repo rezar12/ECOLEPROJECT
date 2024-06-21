@@ -11,7 +11,6 @@
   <hr class="horizontal dark mt-0">
   <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
     <ul class="navbar-nav">
-
       {% admin_get_menu as app_list %}
       {% if app_list %}
           {% for app in app_list %}
@@ -23,7 +22,7 @@
                         <span class="sidebar-icon {{ app.icon }}"></span>
                       </div>
                       <a href="{{ app.url }}" title="{{ app.label }}">
-                        <span class="nav-link-text ms-1">{{ app.label|slice:10 }}{% if app.label|length > 10 %}..{% endif %}</span>
+                        <span class="nav-link-text ms-1" style="font-weight:700;">{{ app.label|slice:35 }}{% if app.label|length > 35 %}..{% endif %}</span>
                       </a>
                     </span>
                   </span>
