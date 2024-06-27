@@ -27,7 +27,7 @@ SETTINGS_PATH = os.path.realpath(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -141,7 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 WHITENOISE_AUTOREFRESH = True
 
 # Durée de vie des sessions (2 semaines)
-SESSION_COOKIE_AGE = 1209600
+SESSION_COOKIE_AGE = 1209600 // 4
 
 # Sessions sécurisées
 SESSION_COOKIE_SECURE = True
