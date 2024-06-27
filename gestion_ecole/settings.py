@@ -25,11 +25,12 @@ SETTINGS_PATH = os.path.realpath(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = eval(os.getenv('DEBUG'))
+DEBUG = True
 
 ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
 
 # Application definition
@@ -80,17 +81,9 @@ WSGI_APPLICATION = 'gestion_ecole.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default_production':dj_database_url.parse(os.environ.get('PRODUCT_URL_DATABASE'), conn_max_age=600),
-    'default':dj_database_url.parse(os.environ.get('LOCAL_URL_DATABASE'), conn_max_age=600),
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': str(os.getenv('NAME_DB')),
-    #     'USER': str(os.getenv('USER_DB')),
-    #     'PASSWORD': str(os.getenv('PASSWORD_DB')),
-    #     'HOST': str(os.getenv('HOST_DB')),
-    # },
 
+DATABASES = {
+    'default':dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
 }
 
 
@@ -130,7 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
