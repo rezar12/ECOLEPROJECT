@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.utils.html import format_html
 from .models import Classe,Eleve,Enseignant,Scolarite,Versement,AnneeScolaire,Inscription,ArticlesInscription
 from .forms import VersementForm
 import openpyxl
@@ -51,9 +50,11 @@ def export_eleves_xlsx(modeladmin, request, queryset):
     Action pour exporter les élèves d'une ou plusieurs classes sélectionnées au format XLSX.
     """
     # Créer un classeur et une feuille de calcul
+    classe_selected = queryset[0]
     workbook = openpyxl.Workbook()
     sheet = workbook.active
     sheet.title = 'Liste des élèves'
+    
 
     # Définir les en-têtes
     headers = ['Nom', 'Prénom', 'Date de naissance', 'Sexe', 'Numéro du père', 'Numéro de la mère']
@@ -61,14 +62,14 @@ def export_eleves_xlsx(modeladmin, request, queryset):
 
     # Boucle sur les classes sélectionnées
     for classe in queryset:
-        inscriptions = Inscription.objects.filter(classe=classe)
+        inscriptions = Inscription.objects.filter(classe=classe).order_by("eleve__nom")
         for inscription in inscriptions:
             eleve = inscription.eleve
             sheet.append([eleve.nom, eleve.prenom, eleve.date_naissance, eleve.sexe, eleve.numero_pere, eleve.numero_mere])
 
     # Créer une réponse HTTP avec le type de contenu XLSX
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = 'attachment; filename=liste_eleves.xlsx'
+    response['Content-Disposition'] = f'attachment; filename=liste des eleves {classe_selected}.xlsx'
     
     # Enregistrer le fichier dans la réponse
     workbook.save(response)

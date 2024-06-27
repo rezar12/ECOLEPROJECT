@@ -233,7 +233,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                     for (var i = totalPages; i > 1; i--) {
                         pdf.deletePage(i);
                     }
-                    
                     // Save the PDF
                     pdf.save(`{{ title }}.pdf`);
                 });

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import dj_database_url
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -80,13 +81,16 @@ WSGI_APPLICATION = 'gestion_ecole.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': str(os.getenv('NAME_DB')),
-        'USER': str(os.getenv('USER_DB')),
-        'PASSWORD': str(os.getenv('PASSWORD_DB')),
-        'HOST': str(os.getenv('HOST_DB')),
-    }
+    'default_production':dj_database_url.parse(os.environ.get('PRODUCT_URL_DATABASE'), conn_max_age=600),
+    'default':dj_database_url.parse(os.environ.get('LOCAL_URL_DATABASE'), conn_max_age=600),
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': str(os.getenv('NAME_DB')),
+    #     'USER': str(os.getenv('USER_DB')),
+    #     'PASSWORD': str(os.getenv('PASSWORD_DB')),
+    #     'HOST': str(os.getenv('HOST_DB')),
+    # },
+
 }
 
 
@@ -137,3 +141,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 WHITENOISE_AUTOREFRESH = True
+
+# Durée de vie des sessions (2 semaines)
+SESSION_COOKIE_AGE = 1209600
+
+# Sessions sécurisées
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+
+# Expiration des sessions à la fermeture du navigateur
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
