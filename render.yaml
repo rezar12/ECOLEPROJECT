@@ -1,0 +1,22 @@
+databases:
+  - name: ecoleDB
+    plan: free
+    databaseName: ecoletianty
+    user: ecoleadmin
+
+services:
+  - type: web
+    plan: free
+    name: ecoleproject
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn gestion_ecole.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ecoleDB
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
